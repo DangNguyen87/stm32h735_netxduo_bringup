@@ -117,6 +117,14 @@ int main(void)
   /* MPU Configuration--------------------------------------------------------*/
   MPU_Config();
 
+  /* Enable the CPU Cache */
+
+  /* Enable I-Cache---------------------------------------------------------*/
+  SCB_EnableICache();
+
+  /* Enable D-Cache---------------------------------------------------------*/
+  SCB_EnableDCache();
+
   /* MCU Configuration--------------------------------------------------------*/
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
@@ -316,20 +324,115 @@ static void MX_GPIO_Init(void)
   /* USER CODE END MX_GPIO_Init_1 */
 
   /* GPIO Ports Clock Enable */
+  __HAL_RCC_GPIOB_CLK_ENABLE();
+  __HAL_RCC_GPIOG_CLK_ENABLE();
+  __HAL_RCC_GPIOD_CLK_ENABLE();
+  __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOE_CLK_ENABLE();
   __HAL_RCC_GPIOC_CLK_ENABLE();
   __HAL_RCC_GPIOH_CLK_ENABLE();
-  __HAL_RCC_GPIOD_CLK_ENABLE();
-  __HAL_RCC_GPIOB_CLK_ENABLE();
-  __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOF_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOC, RED_LED_Pin|GREEN_LED_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pins : PB8 PB6 PB3 PB9
+                           PB7 PB4 PB5 PB15
+                           PB14 PB1 PB10 PB2
+                           PB0 */
+  GPIO_InitStruct.Pin = GPIO_PIN_8|GPIO_PIN_6|GPIO_PIN_3|GPIO_PIN_9
+                          |GPIO_PIN_7|GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_15
+                          |GPIO_PIN_14|GPIO_PIN_1|GPIO_PIN_10|GPIO_PIN_2
+                          |GPIO_PIN_0;
+  GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PG11 PG9 PG13 PG14
+                           PG10 PG15 PG12 PG6
+                           PG5 PG8 PG7 PG4
+                           PG2 PG3 PG1 PG0 */
+  GPIO_InitStruct.Pin = GPIO_PIN_11|GPIO_PIN_9|GPIO_PIN_13|GPIO_PIN_14
+                          |GPIO_PIN_10|GPIO_PIN_15|GPIO_PIN_12|GPIO_PIN_6
+                          |GPIO_PIN_5|GPIO_PIN_8|GPIO_PIN_7|GPIO_PIN_4
+                          |GPIO_PIN_2|GPIO_PIN_3|GPIO_PIN_1|GPIO_PIN_0;
+  GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOG, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PD3 PD1 PD7 PD5
+                           PD2 PD4 PD0 PD6
+                           PD14 PD13 PD15 PD11
+                           PD12 PD10 */
+  GPIO_InitStruct.Pin = GPIO_PIN_3|GPIO_PIN_1|GPIO_PIN_7|GPIO_PIN_5
+                          |GPIO_PIN_2|GPIO_PIN_4|GPIO_PIN_0|GPIO_PIN_6
+                          |GPIO_PIN_14|GPIO_PIN_13|GPIO_PIN_15|GPIO_PIN_11
+                          |GPIO_PIN_12|GPIO_PIN_10;
+  GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PA15 PA14 PA13 PA8
+                           PA12 PA10 PA11 PA9
+                           PA3 PA0 PA4 PA5
+                           PA6 */
+  GPIO_InitStruct.Pin = GPIO_PIN_15|GPIO_PIN_14|GPIO_PIN_13|GPIO_PIN_8
+                          |GPIO_PIN_12|GPIO_PIN_10|GPIO_PIN_11|GPIO_PIN_9
+                          |GPIO_PIN_3|GPIO_PIN_0|GPIO_PIN_4|GPIO_PIN_5
+                          |GPIO_PIN_6;
+  GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PE4 PE3 PE0 PE2
+                           PE1 PE5 PE6 PE14
+                           PE8 PE7 PE12 PE13
+                           PE15 PE10 PE9 PE11 */
+  GPIO_InitStruct.Pin = GPIO_PIN_4|GPIO_PIN_3|GPIO_PIN_0|GPIO_PIN_2
+                          |GPIO_PIN_1|GPIO_PIN_5|GPIO_PIN_6|GPIO_PIN_14
+                          |GPIO_PIN_8|GPIO_PIN_7|GPIO_PIN_12|GPIO_PIN_13
+                          |GPIO_PIN_15|GPIO_PIN_10|GPIO_PIN_9|GPIO_PIN_11;
+  GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PC12 PC11 PC10 PC8
+                           PC7 PC9 PC6 PC0 */
+  GPIO_InitStruct.Pin = GPIO_PIN_12|GPIO_PIN_11|GPIO_PIN_10|GPIO_PIN_8
+                          |GPIO_PIN_7|GPIO_PIN_9|GPIO_PIN_6|GPIO_PIN_0;
+  GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PH14 PH13 PH15 PH7
+                           PH11 PH9 PH2 PH8
+                           PH10 PH12 PH4 PH6
+                           PH3 PH5 */
+  GPIO_InitStruct.Pin = GPIO_PIN_14|GPIO_PIN_13|GPIO_PIN_15|GPIO_PIN_7
+                          |GPIO_PIN_11|GPIO_PIN_9|GPIO_PIN_2|GPIO_PIN_8
+                          |GPIO_PIN_10|GPIO_PIN_12|GPIO_PIN_4|GPIO_PIN_6
+                          |GPIO_PIN_3|GPIO_PIN_5;
+  GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOH, &GPIO_InitStruct);
 
   /*Configure GPIO pin : USER_BUTTON_Pin */
   GPIO_InitStruct.Pin = USER_BUTTON_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(USER_BUTTON_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PF1 PF0 PF2 PF6
+                           PF4 PF5 PF3 PF8
+                           PF7 PF9 PF10 PF11
+                           PF15 PF13 PF12 PF14 */
+  GPIO_InitStruct.Pin = GPIO_PIN_1|GPIO_PIN_0|GPIO_PIN_2|GPIO_PIN_6
+                          |GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_3|GPIO_PIN_8
+                          |GPIO_PIN_7|GPIO_PIN_9|GPIO_PIN_10|GPIO_PIN_11
+                          |GPIO_PIN_15|GPIO_PIN_13|GPIO_PIN_12|GPIO_PIN_14;
+  GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOF, &GPIO_InitStruct);
 
   /*Configure GPIO pins : RED_LED_Pin GREEN_LED_Pin */
   GPIO_InitStruct.Pin = RED_LED_Pin|GREEN_LED_Pin;
@@ -345,7 +448,7 @@ static void MX_GPIO_Init(void)
   HAL_SYSCFG_AnalogSwitchConfig(SYSCFG_SWITCH_PC3, SYSCFG_SWITCH_PC3_CLOSE);
 
   /* EXTI interrupt init*/
-  HAL_NVIC_SetPriority(USER_BUTTON_EXTI_IRQn, 0, 0);
+  HAL_NVIC_SetPriority(USER_BUTTON_EXTI_IRQn, 5, 0);
   HAL_NVIC_EnableIRQ(USER_BUTTON_EXTI_IRQn);
 
   /* USER CODE BEGIN MX_GPIO_Init_2 */
